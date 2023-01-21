@@ -1,35 +1,20 @@
-import express, { json, urlencoded } from 'express';
+import express from 'express';
 import { Server } from 'socket.io';
-import MongoContainer from './container/MessageContainer.js';
-import productRouter from './routes/api.js';
 import cookieParser from 'cookie-parser';
 import session from 'express-session';
-import { validateLogin, validateRegister } from './middleware/userMiddleware.js';
 import FileStore from 'session-file-store';
 import bcrypt from 'bcrypt';
 import * as dotenv from 'dotenv';
 import yargs from 'yargs/yargs';
 import os from 'os';
 import cluster from 'cluster';
-import log4js from 'log4js';
 import compression from 'compression';
+import MongoContainer from './container/MessageContainer.js';
+import productRouter from './routes/api.js';
+import { validateLogin, validateRegister } from './middleware/userMiddleware.js';
+import { configureLogger, logger, warnLogger, errorLogger } from './config/logger.js';
 
-log4js.configure({
-    appenders: {
-        console: { type: 'console' },
-        errors: { type: 'file', filename: 'error.log' },
-        warns: { type: 'file', filename: 'warn.log' }
-    },
-    categories: {
-        default: { appenders: ['console'], level: 'info' },
-        error: { appenders: ['errors', 'console'], level: 'error' },
-        warn: { appenders: ['warns', 'console'], level: 'warn' }
-    }
-});
-
-const logger = log4js.getLogger();
-const warnLogger = log4js.getLogger('warn');
-const errorLogger = log4js.getLogger('error');
+configureLogger();
 
 dotenv.config();
 
@@ -61,10 +46,10 @@ if( SERVER_TYPE !== 'FORK' ) {
 const io = new Server(server);
 
 app.use(cookieParser());
-app.use(json());
+app.use(express.json());
 app.use(compression());
 
-app.use(urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true }));
 
 app.use(express.static('./src/public'));
 app.use('/assets', express.static('./src/public'));
@@ -77,17 +62,6 @@ const messageContainer = new MongoContainer('messages');
 const userContainer = new MongoContainer('user');
 
 const Store = FileStore(session);
-
-// app.use(session({
-//     store: new Store({
-//         path: './src/sessions',
-//         ttl: 60
-//     }),
-//     secret: 'c0d3r-09',
-//     resave: true,
-//     saveUninitialized: true,
-//     cookie: { maxAge: 60000 }
-// }))
 
 app.get('/show-cookie', (req, res) => {
     logger.info('Cookies: ', req.cookies);
