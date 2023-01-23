@@ -9,7 +9,7 @@ import yargs from 'yargs/yargs';
 import os from 'os';
 import cluster from 'cluster';
 import compression from 'compression';
-import MongoContainer from './container/MessageContainer.js';
+import MongoContainer from './dao/MessageContainer.js';
 import productRouter from './routes/api.js';
 import { validateLogin, validateRegister } from './middleware/userMiddleware.js';
 import { configureLogger, logger, warnLogger, errorLogger } from './config/logger.js';
@@ -62,6 +62,17 @@ const messageContainer = new MongoContainer('messages');
 const userContainer = new MongoContainer('user');
 
 const Store = FileStore(session);
+
+app.use(session({
+    store: new Store({
+        path: './src/sessions',
+        ttl: 60
+    }),
+    secret: 'c0d3r-09',
+    resave: true,
+    saveUninitialized: true,
+    cookie: { maxAge: 60000 }
+}))
 
 app.get('/show-cookie', (req, res) => {
     logger.info('Cookies: ', req.cookies);
@@ -154,15 +165,6 @@ app.post('/sendMessage', (req, res) => {
         errorLogger.error('Error: ', error.message);
         res.status(500).send({ status: 'error', message: 'Error al enviar el mensaje' });
     }
-});
-
-app.post('/test-bcrypt', async (req, res) => {
-    const { password } = req.body;
-    const hash = await bcrypt.hash(password, 10);
-    const salt = await bcrypt.genSalt(10);
-    // const hash = bcrypt.hashSync('$2b$10$/ZEOYBDAZRYi2K3d6XeK6.S8HJsZ0kYl6C2V2UEFIHHjiQEcCv.ze', salt);
-    const compare = await bcrypt.compare(password, '$2b$10$75afbpmo7gXMT3LIHzSaku6vci45lVIEktCdtkUhdR2Fna6HONkji');
-    res.send(compare);
 });
 
 io.on('connection', (socket) => {
