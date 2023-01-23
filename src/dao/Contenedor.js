@@ -1,11 +1,11 @@
 import mongoose from "mongoose";
-import { optionsMongoDB } from "../config/mongodb.js";
-import mongo, { MongoClient } from 'mongodb';
+import { MongoClient } from 'mongodb';
+import DBClient from "./DBClient.js";
 
-
-class Contenedor {
+class Contenedor extends DBClient {
 
     constructor(collection) {
+        super();
         this.collection = collection;
         this.options = {};
     }
