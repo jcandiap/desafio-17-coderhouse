@@ -17,10 +17,8 @@ let divInsertProduct = document.getElementById('insert-product-container');
 let userContainer = document.getElementById('user-container');
 
 const handleLogout = async () => {
-    console.log('entro');
     let response = await fetch('/logout');
     let { status, message } = await response.json();
-    console.log(status, message);
     if( status === 'ok' ) {
         Swal.fire({
             text: message,
@@ -150,7 +148,7 @@ const handleRegister = async (evt, form) => {
         });
         return;
     }
-    let response = await fetch('/register', {
+    let response = await fetch('/user/register', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -186,12 +184,11 @@ const validatePassword = ({ password, passwordConfirm }) => {
 }
 
 const handleLogin = async (evt, form) => {
-    console.log('entro');
     evt.preventDefault();
     let frm = new FormData(form);
     let requestObject = {};
     frm.forEach((value, key) => requestObject[key] = value);
-    let responseService = await fetch('/login', {
+    let responseService = await fetch('/user/login', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
