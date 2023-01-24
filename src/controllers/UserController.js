@@ -1,7 +1,7 @@
 import bcrypt from 'bcrypt';
 import log4js from 'log4js';
 
-import MongoContainer from '../dao/MessageContainer.js';
+import MongoContainer from '../dao/MongoContainer.js';
 
 const userContainer = new MongoContainer('user');
 const logger = log4js.getLogger();

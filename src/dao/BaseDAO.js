@@ -1,0 +1,30 @@
+import DBClient from "./DBClient";
+
+class BaseDAO extends DBClient {
+
+    async save(object) {
+        throw new Error('no se ha implementado el metodo save');
+    }
+
+    async get(object) {
+        throw new Error('no se ha implementado el metodo get');
+    }
+
+    async getById(object) {
+        throw new Error('no se ha implementado el metodo getById');
+    }
+
+    async getAll(object) {
+        throw new Error('no se ha implementado el metodo getAll');
+    }
+
+    async update(object) {
+        throw new Error('no se ha implementado el metodo update');
+    }
+
+    async delete(object) {
+        throw new Error('no se ha implementado el metodo delete');
+    }
+}
+
+export default BaseDAO;
