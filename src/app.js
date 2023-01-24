@@ -38,16 +38,23 @@ if( SERVER_TYPE !== 'FORK' ) {
     app.listen(PORT, () => logger.info(`Servidor iniciado en mondo ${ SERVER_TYPE } en el puerto ${ PORT } y el proceso ${ process.pid }`));
 }
 
+// initial config express
 app.use(cookieParser());
 app.use(express.json());
 app.use(compression());
-
 app.use(express.urlencoded({ extended: true }));
 
+// specific static resources
 app.use(express.static('./src/public'));
 app.use('/assets', express.static('./src/public'));
 app.use('/scripts', express.static('./src/public'));
 
+// server routes
+app.use('/api', productRouter);
+app.use('/system', systemRouter);
+app.use('/user', userRouter)
+
+// template engine config
 app.set('views', './src/views');
 app.set('view engine', 'pug');
 
@@ -64,11 +71,8 @@ app.use(session({
     cookie: { maxAge: 60000 }
 }))
 
+// home page
 app.get('/', (req, res) => res.render('home'));
-
-app.use('/api', productRouter);
-app.use('/system', systemRouter);
-app.use('/user', userRouter)
 
 app.use(function(req, res) {
     warnLogger.warn(`Error 404 - No encontrado [${ req.originalUrl }]`);
