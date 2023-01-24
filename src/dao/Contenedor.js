@@ -19,7 +19,6 @@ class Contenedor extends DBClient {
             const collection = database.collection(this.collection);
             return collection;
         } catch (error) {
-            console.log('Error al conectar a MongoDB: ', error);
             return null;
         }
     }
@@ -35,7 +34,6 @@ class Contenedor extends DBClient {
             products = await collection.find({}).toArray();
             await this.disconnect();   
         } catch (error) {
-            console.log(error);
             throw new Error('Error al obtener todos los productos');
         }
         return products;
