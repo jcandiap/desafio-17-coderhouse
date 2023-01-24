@@ -18,7 +18,6 @@ class MongoContainer extends DBClient {
             const collection = database.collection(this.collection);
             return collection;
         } catch (error) {
-            console.log('Error al conectar a MongoDB: ', error);
             return null;
         }
     }
@@ -46,7 +45,6 @@ class MongoContainer extends DBClient {
             objects = await collection.find({}).toArray();
             await this.disconnect();
         } catch (error) {
-            console.log(error);
             throw new Error('Error al obtener todos los registros');
         }
         return objects;
