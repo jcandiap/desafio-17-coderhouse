@@ -1,6 +1,6 @@
-import DBClient from "./DBClient";
+import DBClientMongo from "./DBClientMongo";
 
-class BaseDAO extends DBClient {
+class BaseDAO extends DBClientMongo {
 
     async save(object) {
         throw new Error('no se ha implementado el metodo save');
@@ -14,7 +14,7 @@ class BaseDAO extends DBClient {
         throw new Error('no se ha implementado el metodo getById');
     }
 
-    async getAll(object) {
+    async getAll() {
         throw new Error('no se ha implementado el metodo getAll');
     }
 
