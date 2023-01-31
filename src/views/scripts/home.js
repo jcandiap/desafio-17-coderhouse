@@ -1,4 +1,4 @@
-const socket = io();
+// const socket = io();
 
 let formRegister = document.getElementById('form-register');
 let formLogin = document.getElementById('form-login');
@@ -75,36 +75,36 @@ const findActiveSession = async () => {
 findActiveSession();
 
 
-socket.on('newUserConnected', ({ userName }) => {
-    if( isChatActivated ) {
-        Swal.fire({
-            text: `Se ha conectado ${ userName }`,
-            toast: true,
-            icon: 'info',
-            position: 'bottom-end',
-            timer: 2000,
-            showConfirmButton: false,
-        });
-    }
-});
+// socket.on('newUserConnected', ({ userName }) => {
+//     if( isChatActivated ) {
+//         Swal.fire({
+//             text: `Se ha conectado ${ userName }`,
+//             toast: true,
+//             icon: 'info',
+//             position: 'bottom-end',
+//             timer: 2000,
+//             showConfirmButton: false,
+//         });
+//     }
+// });
 
 const getData = async () => {
-    let response = await fetch('/api/productos-test');
-    let data = await response.json();
+    let response = await fetch('/api/productos');
+    let { data } = await response.json();
     data.forEach(product => addProductTable(product));
 }
 
-socket.on('newProductRegister', (product) => {
-    addProductTable(product);
-});
+// socket.on('newProductRegister', (product) => {
+//     addProductTable(product);
+// });
 
-socket.on('getProducts', (products) => {
-    let tableBody = document.getElementById('body-table-products');
-    tableBody.innerHTML = '';
-    products.forEach(product => {
-        addProductTable(product);
-    })
-})
+// socket.on('getProducts', (products) => {
+//     let tableBody = document.getElementById('body-table-products');
+//     tableBody.innerHTML = '';
+//     products.forEach(product => {
+//         addProductTable(product);
+//     })
+// })
 
 const addProductTable = (product) => {
     let tableBody = document.getElementById('body-table-products');
@@ -241,7 +241,7 @@ const handleAddProduct = async (evt, form) => {
             timer: 2000,
             showConfirmButton: false,
         });
-        socket.emit('addProduct', data);
+        // socket.emit('addProduct', data);
     } else {
         Swal.fire({
             text: message,
