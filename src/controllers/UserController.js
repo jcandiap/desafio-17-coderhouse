@@ -2,6 +2,7 @@ import bcrypt from 'bcrypt';
 import log4js from 'log4js';
 
 import UserDAO from '../dao/UserDAO.js';
+import UserDTO from '../dto/UserDTO.js';
 
 const userContainer = new UserDAO();
 const logger = log4js.getLogger();
@@ -16,10 +17,10 @@ export const register = async (req, res) => {
             res.status(400).send({ status: 'error', message: 'Ya existe un usuario con ese email' });
             return;
         }
-        delete data?.passwordConfirm;
         data.password = await bcrypt.hash(data.password, 10);
         await userContainer.save(data);
-        req.session.user = data;
+        const userDTO = new UserDTO(data);
+        req.session.user = userDTO;
         res.send({ status: 'ok', message: 'Usuario creado con exito' });
     } catch (error) {
         errorLogger.error('Error: ', error.message);
@@ -34,9 +35,9 @@ export const login = async (req, res) => {
         if( Boolean(user) ) {
             const validatePassword = await bcrypt.compare(req.body.password, user.password);
             if( validatePassword ) {
-                delete user?.password;
-                req.session.user = user;
-                res.send({ status: 'ok', response: user, message: `¡${ user.nombre } ${ user.apellido } se ha conectado!` });
+                const userDTO = new UserDTO(user);
+                req.session.user = userDTO;
+                res.send({ status: 'ok', response: userDTO, message: `¡${ userDTO.nombre } ${ userDTO.apellido } se ha conectado!` });
             } else {
                 res.status(401).send({ status: 'error', message: 'Contraseña incorrecta' });
             }
