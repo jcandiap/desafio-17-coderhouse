@@ -13,3 +13,12 @@
 [2023-01-23T15:42:42.593] [ERROR] error - Error:  No hay sesión activa
 [2023-01-23T16:40:28.060] [ERROR] error - Error:  No hay sesión activa
 [2023-01-23T16:40:42.899] [ERROR] error - Error:  No hay sesión activa
+[2023-01-31T18:47:02.450] [ERROR] error - Error:  Cannot set property 'user' of undefined
+[2023-01-31T18:47:03.457] [ERROR] error - Error:  Cannot set property 'user' of undefined
+[2023-01-31T18:47:18.967] [ERROR] error - Error:  Cannot set property 'user' of undefined
+[2023-01-31T18:47:26.830] [ERROR] error - Error:  Cannot set property 'user' of undefined
+[2023-01-31T18:47:54.735] [ERROR] error - Error:  Cannot set property 'user' of undefined
+[2023-01-31T18:49:19.576] [ERROR] error - Error:  Cannot set property 'user' of undefined
+[2023-01-31T18:49:28.971] [ERROR] error - Error:  Cannot set property 'user' of undefined
+[2023-01-31T18:50:26.161] [ERROR] error - Error:  Cannot set property 'user' of undefined
+[2023-01-31T18:51:00.281] [ERROR] error - Error:  Cannot set property 'user' of undefined
