@@ -1,7 +1,7 @@
-import Contenedor from '../dao/Contenedor.js';
 import log4js from 'log4js';
+import ProductsDAO from '../dao/ProductsDAO.js';
 
-const productContainer = new Contenedor('products');
+const productContainer = new ProductsDAO();
 
 const logger = log4js.getLogger();
 const warnLogger = log4js.getLogger('warn');

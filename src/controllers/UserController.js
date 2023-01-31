@@ -1,9 +1,9 @@
 import bcrypt from 'bcrypt';
 import log4js from 'log4js';
 
-import MongoContainer from '../dao/MongoContainer.js';
+import UserDAO from '../dao/UserDAO.js';
 
-const userContainer = new MongoContainer('user');
+const userContainer = new UserDAO();
 const logger = log4js.getLogger();
 const errorLogger = log4js.getLogger('error');
 
