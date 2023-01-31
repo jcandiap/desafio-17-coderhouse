@@ -38,6 +38,23 @@ if( SERVER_TYPE !== 'FORK' ) {
     app.listen(PORT, () => logger.info(`Servidor iniciado en mondo ${ SERVER_TYPE } en el puerto ${ PORT } y el proceso ${ process.pid }`));
 }
 
+const Store = FileStore(session);
+
+app.use(session({
+    store: new Store({
+        path: './src/sessions',
+        ttl: 60
+    }),
+    secret: 'c0d3r-09',
+    resave: true,
+    saveUninitialized: true,
+    cookie: { maxAge: 60000 }
+}));
+
+app.get('/activeSession', (req, res) => {
+    res.send(req.session);
+})
+
 // initial config express
 app.use(cookieParser());
 app.use(express.json());
@@ -57,19 +74,6 @@ app.use('/user', userRouter)
 // template engine config
 app.set('views', './src/views');
 app.set('view engine', 'pug');
-
-const Store = FileStore(session);
-
-app.use(session({
-    store: new Store({
-        path: './src/sessions',
-        ttl: 60
-    }),
-    secret: 'c0d3r-09',
-    resave: true,
-    saveUninitialized: true,
-    cookie: { maxAge: 60000 }
-}))
 
 // home page
 app.get('/', (req, res) => res.render('home'));
