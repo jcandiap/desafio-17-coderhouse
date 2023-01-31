@@ -1,4 +1,4 @@
-import DBClientMongo from "./DBClientMongo";
+import DBClientMongo from "./DBClientMongo.js";
 
 class BaseDAO extends DBClientMongo {
 
