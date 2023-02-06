@@ -35,3 +35,9 @@
 [2023-01-31T19:52:39.424] [WARN] warn - Error 404 - No encontrado [/qadsd]
 [2023-01-31T19:52:39.430] [WARN] warn - Error 404 - No encontrado [/XD]
 [2023-01-31T19:52:39.433] [WARN] warn - Error 404 - No encontrado [/test]
+[2023-02-05T22:45:09.554] [WARN] warn - Error 404 - No encontrado [/api/productos]
+[2023-02-05T22:46:20.921] [WARN] warn - Error 404 - No encontrado [/api/productos/]
+[2023-02-05T22:47:42.933] [WARN] warn - Usuario no registrado intenta crear un producto
+[2023-02-05T22:56:17.589] [WARN] warn - Usuario no registrado intenta crear un producto
+[2023-02-05T23:01:30.888] [WARN] warn - Usuario no registrado intenta crear un producto
+[2023-02-05T23:04:36.000] [WARN] warn - Usuario no registrado intenta crear un producto
