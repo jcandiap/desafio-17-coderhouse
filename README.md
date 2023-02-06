@@ -1,4 +1,4 @@
-# Desafio 15 Coderhouse
+# Desafio 16 Coderhouse
 Información adicional sobre el desafio de balanceador de carga
 # Aspectos a considerar 😔
 + El archivo generado por ```--prof``` quedó procesado y guardado con el nombre ```artillery/result-log.txt```
@@ -12,3 +12,4 @@ Información adicional sobre el desafio de balanceador de carga
 #### Comandos para ejecutar aplicación sin pm2
 + Ejecución en modo **cluster**: ```node src/app.js --port=8081 --modo=CLUSTER```
 + Ejecución en modo **fork**: ```node src/app.js --port=8081 --modo=FORK```
++ Ejecutar pruebas con **Mocha**: ```npm run mocha```
