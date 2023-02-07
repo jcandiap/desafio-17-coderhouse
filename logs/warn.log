@@ -41,3 +41,7 @@
 [2023-02-05T22:56:17.589] [WARN] warn - Usuario no registrado intenta crear un producto
 [2023-02-05T23:01:30.888] [WARN] warn - Usuario no registrado intenta crear un producto
 [2023-02-05T23:04:36.000] [WARN] warn - Usuario no registrado intenta crear un producto
+[2023-02-06T20:56:20.139] [WARN] warn - Error 404 - No encontrado [/api/producto/]
+[2023-02-06T20:56:38.205] [WARN] warn - Error 404 - No encontrado [/api/producto/63e193b68f7a33e403f02b05]
+[2023-02-06T20:57:09.474] [WARN] warn - Error 404 - No encontrado [/api/producto/63e193d58f7a33e403f02b06]
+[2023-02-06T20:57:44.378] [WARN] warn - Error 404 - No encontrado [/api/producto/63e193d58f7a33e403f02b06]
