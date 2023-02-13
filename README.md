@@ -1,4 +1,4 @@
-# Desafio 16 Coderhouse
+# Desafio 17 Coderhouse
 Información adicional sobre el desafio de balanceador de carga
 # Aspectos a considerar 😔
 + El archivo generado por ```--prof``` quedó procesado y guardado con el nombre ```artillery/result-log.txt```
