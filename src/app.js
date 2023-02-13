@@ -10,6 +10,7 @@ import productRouter from './routes/api.js';
 import { configureLogger, logger, warnLogger } from './config/logger.js';
 import systemRouter from './routes/system.js';
 import userRouter from './routes/user.js';
+import productGraphRouter from './routes/apiGraph.js';
 
 configureLogger();
 
@@ -69,7 +70,8 @@ app.use('/scripts', express.static('./src/public'));
 // server routes
 app.use('/api', productRouter);
 app.use('/system', systemRouter);
-app.use('/user', userRouter)
+app.use('/user', userRouter);
+app.use('/graphql', productGraphRouter);
 
 // template engine config
 app.set('views', './src/views');
