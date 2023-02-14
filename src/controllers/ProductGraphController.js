@@ -26,21 +26,25 @@ export const getProducts = async () => {
 }
 
 export const createProduct = async ({ productInput }) => {
-    logger.info('inicia metodo [producto]');
-    const product = await productContainer.save(productInput);
-    return product;
+    try {
+        logger.info('inicia metodo [producto]');
+        const product = await productContainer.save(productInput);
+        return product;
+    } catch (error) {
+        throw new Error(error.message);
+    }
 }
 
-export const updateProduct = async () => {
+export const updateProduct = async ({ id, productInput }) => {
     logger.info('inicia metodo [editar producto]')
-    let id = req.params.id;
-    !Boolean(id) && res.send({ status: 'error', error: 'Debe ingresar un id de producto' });
     try {
-        const product = await productContainer.update({ ...req.body, id });
-        const response = new ProductDTO(product);
-        !!response ? res.send({ status: 'ok', message: 'Producto modificado con exito', data: response }) : res.send({ status:'error', error: 'Error al editar producto' });
-    } catch(error) {
-        res.send({ status: 'error', error: 'Error en la ejecución del servicio' });
+        const product = await productContainer.getById(id);
+        if( product ) { 
+            const productUpdated = await productContainer.update({ ...product, ...productInput, id });
+            return productUpdated;
+        }
+    } catch (error) {
+        throw new Error(error.message);
     }
 }
 
@@ -53,6 +57,6 @@ export const deleteProduct = async ({ id }) => {
         }
         return product;
     } catch(error) {
-        res.send({ status: 'error', error: 'Error en la ejecución del servicio' });
+        throw new Error(error.message);
     }
 }
